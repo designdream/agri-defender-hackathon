@@ -179,172 +179,274 @@ function animateAffectedArea(areaObj) {
     areaObj.position.y = Math.sin(pulse.time * 0.7) * 0.05;
     
     requestAnimationFrame(animate);
-- **Features:** 
-  - Multi-class classification for different disease types
-  - Confidence scoring
-  - Bounding box detection for affected areas
-  - Transfer learning from pre-trained models for efficiency
+}
+```
 
-**Implementation Path:**
-1. Collect and label crop disease images
-2. Fine-tune a pre-trained CNN on the dataset
-3. Implement post-processing for actionable insights
-4. Optimize for mobile deployment
+## API Integration Guide
 
-### 2. Pathogen Spread Prediction Model
+AgriDefender 3D is designed to integrate with real-world data sources through standardized APIs. This guide outlines the implementation details for connecting sensors, drones, and threat detection systems to the visualization platform.
 
-**Purpose:** Predict how detected pathogens will spread over time
+### Sensor Data API
 
-**Suggested Approach:**
-- **Architecture:** Combined LSTM and spatial CNN as implemented in `src/models/spread_prediction.py`
-- **Training Data:** Historical spread patterns, weather data, and geographic features
-- **Features:**
-  - Temporal-spatial prediction
-  - Environmental factor consideration
-  - Confidence degradation over time
-  - Multiple scenario generation
+**Purpose:** Collect and process real-time data from field sensors for visualization.
 
-**Implementation Path:**
-1. Enhance the existing LSTM model with attention mechanisms
-2. Incorporate weather API data as additional features
-3. Validate with historical outbreak data
-4. Implement uncertainty quantification
+**API Endpoints:**
 
-### 3. Companion Planting Optimizer
+```
+GET /api/v1/sensors - List all sensors
+GET /api/v1/sensors/{sensor_id} - Get specific sensor details
+POST /api/v1/sensors/data - Submit new sensor reading
+GET /api/v1/sensors/data/{sensor_id} - Get historical readings
+```
 
-**Purpose:** Generate optimal companion planting strategies
+**Data Format Example:**
 
-**Suggested Approach:**
-- **Architecture:** Reinforcement learning or genetic algorithm optimization
-- **Training Data:** Plant interaction data, historical yield results, pest resistance outcomes
-- **Features:**
-  - Multi-objective optimization (yield, pest resistance, resource usage)
-  - Constraint handling for climate and soil conditions
-  - Compatibility scoring
+```json
+{
+  "sensor_id": "soil-sensor-0042",
+  "timestamp": "2025-04-27T17:30:22Z",
+  "location": {"x": 156.3, "y": 0.3, "z": 78.2},
+  "type": "SOIL",
+  "readings": {
+    "moisture": 37.8,
+    "temperature": 22.5,
+    "pH": 6.8,
+    "nitrogen": 42,
+    "conductivity": 0.38
+  },
+  "battery": 87,
+  "status": "ACTIVE"
+}
+```
 
-**Implementation Path:**
-1. Build a knowledge graph of plant interactions
-2. Develop an optimization algorithm that maximizes positive interactions
-3. Incorporate geographical and climate constraints
-4. Validate against known successful companion planting patterns
+**Integration Implementation:**
 
-### 4. Early Warning Anomaly Detection
+```javascript
+// In field-data.js
+async function fetchSensorData() {
+  try {
+    const response = await fetch('https://api.agridefender.io/v1/sensors');
+    if (!response.ok) throw new Error('Network response failed');
+    
+    const sensors = await response.json();
+    return sensors.map(sensor => ({
+      id: sensor.sensor_id,
+      type: sensor.type,
+      location: { x: sensor.location.x, y: sensor.location.y, z: sensor.location.z },
+      readings: sensor.readings,
+      status: sensor.status,
+      lastUpdated: new Date(sensor.timestamp)
+    }));
+  } catch (error) {
+    console.error('Error fetching sensor data:', error);
+    return fallbackSensorData(); // Use local data if API fails
+  }
+}
+```
 
-**Purpose:** Identify unusual patterns in sensor data that might indicate emerging threats
+### Drone Control API
 
-**Suggested Approach:**
-- **Architecture:** Autoencoder or One-Class SVM for anomaly detection
-- **Training Data:** Normal sensor readings across different conditions
-- **Features:**
-  - Unsupervised learning to detect deviations
-  - Sensor fusion from multiple data sources
-  - Adaptive thresholds based on environmental conditions
+**Purpose:** Monitor and control autonomous drones for field surveillance.
 
-**Implementation Path:**
-1. Train models on "normal" agricultural conditions
-2. Implement real-time scoring of incoming sensor data
-3. Create adaptive alerting thresholds
-4. Develop feedback mechanisms to improve detection accuracy
+**API Endpoints:**
 
-### User Feedback Loop
-- Add rating system for recommendation effectiveness
-- Implement follow-up notifications to track implementation success
-- Create community sharing of successful defense strategies
+```
+GET /api/v1/drones - List all drones
+GET /api/v1/drones/{drone_id} - Get specific drone status
+POST /api/v1/drones/{drone_id}/mission - Assign patrol mission
+GET /api/v1/drones/{drone_id}/telemetry - Get real-time telemetry
+```
 
-### Mobile Optimization
-- Create mobile-friendly interfaces for field use
-- Implement offline capabilities for areas with limited connectivity
-- Develop lightweight ML models for on-device processing
+**Data Format Example:**
 
-## Contributing
+```json
+{
+  "drone_id": "patrol-drone-007",
+  "model": "AgriScout X2",
+  "status": "PATROL",
+  "battery": 76,
+  "location": {"x": 423.1, "y": 45.8, "z": 216.4},
+  "speed": 5.2,
+  "heading": 283,
+  "altitude": 45.8,
+  "mission": {
+    "id": "mission-2025-04-27-12",
+    "type": "PATROL",
+    "waypoints": [
+      {"x": 400, "y": 45, "z": 200},
+      {"x": 450, "y": 45, "z": 200},
+      {"x": 450, "y": 45, "z": 250},
+      {"x": 400, "y": 45, "z": 250}
+    ],
+    "progress": 68
+  }
+}
+```
 
-Contributions to AgriDefender are welcome! Please see our contributing guidelines for details.
+**Integration Implementation:**
+
+```javascript
+// In field-data.js
+async function fetchDroneData() {
+  try {
+    const response = await fetch('https://api.agridefender.io/v1/drones');
+    if (!response.ok) throw new Error('Network response failed');
+    
+    const drones = await response.json();
+    return drones.map(drone => ({
+      id: drone.drone_id,
+      model: drone.model,
+      status: drone.status,
+      location: { x: drone.location.x, y: drone.location.y, z: drone.location.z },
+      battery: drone.battery,
+      patrolPath: drone.mission?.waypoints || [],
+      currentWaypoint: Math.floor((drone.mission?.progress || 0) / 100 * 
+                     (drone.mission?.waypoints?.length || 1))
+    }));
+  } catch (error) {
+    console.error('Error fetching drone data:', error);
+    return fallbackDroneData(); // Use local data if API fails
+  }
+}
+```
+
+### Threat Detection API
+
+**Purpose:** Process and visualize detected agricultural threats.
+
+**API Endpoints:**
+
+```
+GET /api/v1/threats - List all detected threats
+GET /api/v1/threats/{threat_id} - Get specific threat details
+POST /api/v1/threats - Report a new threat
+PUT /api/v1/threats/{threat_id}/status - Update threat status
+```
+
+**Data Format Example:**
+
+```json
+{
+  "threat_id": "threat-2025-04-27-036",
+  "name": "Powdery Mildew Infection",
+  "type": "Fungal",
+  "severity": "High",
+  "location": {"x": 256.7, "y": 0.2, "z": 189.3},
+  "affectedArea": 78.5,
+  "detectedDate": "2025-04-27T09:45:18Z",
+  "detectionMethod": "SENSOR",
+  "detectedBy": "soil-sensor-0028",
+  "confidence": 0.94,
+  "status": "ACTIVE",
+  "progression": 0.35,
+  "description": "White powdery substances on crop leaves with signs of spreading to nearby plants.",
+  "recommendedActions": [
+    "Apply organic fungicide immediately",
+    "Increase plant spacing in affected area",
+    "Reduce overhead irrigation"
+  ]
+}
+```
+
+**Integration Implementation:**
+
+```javascript
+// In threat-visualization.js
+async function fetchThreatData() {
+  try {
+    const response = await fetch('https://api.agridefender.io/v1/threats');
+    if (!response.ok) throw new Error('Network response failed');
+    
+    const threats = await response.json();
+    return threats.map(threat => ({
+      id: threat.threat_id,
+      name: threat.name,
+      type: threat.type,
+      severity: threat.severity,
+      location: { x: threat.location.x, y: threat.location.y, z: threat.location.z },
+      affectedArea: threat.affectedArea,
+      detectedDate: threat.detectedDate,
+      confidence: threat.confidence,
+      status: threat.status,
+      description: threat.description,
+      recommendations: threat.recommendedActions
+    }));
+  } catch (error) {
+    console.error('Error fetching threat data:', error);
+    return fallbackThreatData(); // Use local data if API fails
+  }
+}
+```
+
+### Webhook Integration for Real-time Updates
+
+For real-time updates, AgriDefender 3D uses WebSockets to receive push notifications when new data is available:
+
+```javascript
+// In main.js
+function initializeRealTimeUpdates() {
+  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const socket = new WebSocket(`${wsProtocol}//api.agridefender.io/v1/websocket`);
+  
+  socket.onopen = () => {
+    console.log('WebSocket connection established');
+    // Subscribe to relevant data channels
+    socket.send(JSON.stringify({
+      action: 'subscribe',
+      channels: ['sensors', 'drones', 'threats']
+    }));
+  };
+  
+  socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    
+    // Handle different types of updates
+    switch (data.type) {
+      case 'sensor_update':
+        updateSensorData(data.payload);
+        break;
+      case 'drone_update':
+        updateDronePosition(data.payload);
+        break;
+      case 'threat_detected':
+        addNewThreat(data.payload);
+        break;
+      case 'threat_update':
+        updateThreatStatus(data.payload);
+        break;
+    }
+  };
+  
+  socket.onerror = (error) => {
+    console.error('WebSocket error:', error);
+  };
+  
+  socket.onclose = () => {
+    console.log('WebSocket connection closed');
+    // Attempt to reconnect after a delay
+    setTimeout(initializeRealTimeUpdates, 5000);
+  };
+}
+```
+
+## Future Enhancements
+
+Planned features for future development:
+
+1. **Real-time Data Integration**: Connect to actual field sensor APIs for live data visualization
+2. **AI Threat Prediction**: Integrate machine learning models to predict threat spread
+3. **VR Support**: Add WebXR API support for fully immersive VR field exploration
+4. **Advanced Weather System**: Dynamic weather visualization with impact on threat development
+5. **Collaborative Field Inspection**: Multi-user support for team-based field monitoring
+
+## Acknowledgments
+
+- NARD (National Agricultural Research Department) for providing support and direction
+- Three.js community for development resources and examples
+- Agricultural defense researchers for domain expertise
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
 
-- Research concepts derived from the Agricultural Defense Hackathon
-- Special thanks to all contributors and agricultural domain experts
-
-## Usage Examples
-
-### Submitting Sensor Data
-
-```python
-import requests
-import json
-
-# Example soil sensor data
-soil_data = {
-    "data": {
-        "sensor_id": "sensor-001",
-        "timestamp": "2025-04-26T15:30:45Z",
-        "location": {
-            "type": "Point",
-            "coordinates": [-97.7431, 30.2672]
-        },
-        "sensor_type": "SOIL",
-        "moisture": 65.0,
-        "ph": 5.5,
-        "temperature": 24.3,
-        "nitrogen": 40.2,
-        "phosphorus": 22.8,
-        "potassium": 120.6
-    }
-}
-
-response = requests.post(
-    "http://localhost:8000/api/v1/sensors/data", 
-    json=soil_data
-)
-print(response.json())
-```
-
-### Querying Threats
-
-```python
-import requests
-
-# Get all HIGH severity threats
-response = requests.get(
-    "http://localhost:8000/api/v1/threats",
-    params={"threat_level": "HIGH"}
-)
-
-threats = response.json()
-for threat in threats:
-    print(f"ID: {threat['id']}")
-    print(f"Type: {threat['threat_type']}")
-    print(f"Level: {threat['threat_level']}")
-    print(f"Confidence: {threat['confidence']:.2f}")
-    print(f"Description: {threat['description']}")
-    print("Recommendations:")
-    for rec in threat['recommendations']:
-        print(f"- {rec}")
-    print("-" * 50)
-```
-
-### Running a Prediction Model
-
-```python
-from src.models.spread_prediction import PathogenSpreadModel
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Load the model
-model = PathogenSpreadModel.load_model("models/latest_model.h5")
-
-# Run a prediction
-initial_state = np.load("data/initial_state.npy")
-predictions = model.predict_spread(
-    initial_state=initial_state,
-    time_steps=7  # Predict 7 days ahead
-)
-
-# Generate a heatmap
-heatmap = model.generate_probability_heatmap(predictions)
-model.plot_heatmap(heatmap, save_path="output/heatmap.png")
-```
