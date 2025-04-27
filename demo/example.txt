@@ -1,0 +1,58 @@
+# AgriDefender Demo Documentation
+
+This file contains examples and demonstrations of the AgriDefender system capabilities.
+
+## Overview
+
+AgriDefender is a comprehensive system for detecting, monitoring, predicting, and responding to biological threats to agriculture. It integrates several innovative research concepts into a unified platform.
+
+## Key Features to Demonstrate
+
+1. **Threat Detection and Monitoring**
+   - Sensor data collection and visualization
+   - Image-based disease identification
+   - Threat mapping and geospatial analysis
+
+2. **Disease Identification**
+   - AI Diagnostic Assistant implementation
+   - Image upload and analysis
+   - Treatment recommendations
+
+3. **Spread Prediction**
+   - LSTM-based pathogen spread modeling
+   - Temporal-spatial prediction visualization
+   - Confidence scoring for predictions
+
+4. **Companion Planting**
+   - AI-driven planting recommendations
+   - Visualization of planting patterns
+   - Compatibility scoring and seasonal guidance
+
+5. **Community Alerts**
+   - Geofenced notification system
+   - Multi-channel alerts (SMS, email, app)
+   - Blockchain verification of reports
+
+## Running the Demo
+
+To start the standalone demo:
+
+```bash
+python demo.py
+```
+
+For the full application:
+
+```bash
+# Start the API server
+cd src
+python -m api.main
+
+# In a separate terminal, start the dashboard
+cd src
+streamlit run dashboard/app.py
+```
+
+## Development Notes
+
+The demo implements simplified versions of the full application features using mock data. For production use, refer to the README.md file for complete setup instructions.

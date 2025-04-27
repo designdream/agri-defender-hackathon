@@ -1,0 +1,50 @@
+# Data processing
+numpy==1.23.5
+pandas==2.0.1
+scipy==1.10.1
+
+# Machine learning
+scikit-learn==1.2.2
+tensorflow==2.12.0
+torch==2.0.1
+
+# Image processing
+opencv-python==4.7.0.72
+Pillow==9.5.0
+
+# Geospatial analysis
+geopandas==0.13.0
+shapely==2.0.1
+pyproj==3.5.0
+rtree==1.0.1
+folium==0.14.0
+
+# Web framework
+fastapi==0.96.0
+uvicorn==0.22.0
+pydantic==1.10.9
+python-multipart==0.0.6
+
+# AWS integration
+boto3==1.26.151
+awscli==1.27.151
+
+# Database
+sqlalchemy==2.0.16
+psycopg2-binary==2.9.6
+alembic==1.11.1
+
+# Testing
+pytest==7.3.1
+locust==2.15.1
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+tqdm==4.65.0
+matplotlib==3.7.1
+plotly==5.15.0
+
+# Additional dependencies
+geojson-pydantic==0.5.0
+redis==4.5.5

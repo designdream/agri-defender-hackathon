@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriDefender 3D - Crop Threat Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Container for Three.js canvas -->
+    <div id="canvas-container"></div>
+
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="logo">AgriDefender 3D</div>
+            <div class="spinner"></div>
+            <div class="loading-text">Loading field data...</div>
+        </div>
+    </div>
+
+    <div id="hud">
+        <div class="hud-top">
+            <div class="logo-small">AgriDefender</div>
+            <div class="date-time">April 27, 2025 | 07:54 AM</div>
+            <div class="weather-info">
+                <span>72°F</span>
+                <span>Sunny</span>
+                <span>Humidity: 45%</span>
+            </div>
+        </div>
+        
+        <div class="controls-panel">
+            <div class="panel-header">
+                <h3>Field Controls</h3>
+                <button class="btn-icon">◀</button>
+            </div>
+            <div class="panel-content">
+                <div class="control-group">
+                    <label>View Mode</label>
+                    <div class="button-group view-mode-controls">
+                        <button class="control-btn active" data-mode="overhead">Overhead</button>
+                        <button class="control-btn" data-mode="firstPerson">First Person</button>
+                        <button class="control-btn" data-mode="drone">Drone</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Threat Filter</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox">
+                            <input type="checkbox" name="filter-fungal" checked>
+                            <span class="checkmark fungal"></span>
+                            Fungal
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="filter-bacterial" checked>
+                            <span class="checkmark bacterial"></span>
+                            Bacterial
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="filter-viral" checked>
+                            <span class="checkmark viral"></span>
+                            Viral
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="filter-pest" checked>
+                            <span class="checkmark pest"></span>
+                            Pest
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Severity Filter</label>
+                    <div class="button-group severity-controls">
+                        <button class="control-btn active" data-severity="all">All</button>
+                        <button class="control-btn" data-severity="high">High</button>
+                        <button class="control-btn" data-severity="medium">Medium</button>
+                        <button class="control-btn" data-severity="low">Low</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Time Range <span id="time-value">7 days</span></label>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="30" value="7" class="slider" id="time-range">
+                        <div class="slider-labels">
+                            <span>1 day</span>
+                            <span>15 days</span>
+                            <span>30 days</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Field Selection</label>
+                    <select id="field-selector" class="select-control">
+                        <option value="field1">North Wheat Field</option>
+                        <option value="field2">South Corn Field</option>
+                        <option value="field3">East Orchard</option>
+                    </select>
+                </div>
+                
+                <div class="control-group actions">
+                    <button class="btn-primary">Analyze New Image</button>
+                    <button class="btn-secondary">Generate Report</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="threat-info-panel">
+            <div class="panel-header">
+                <h3>Threat Information</h3>
+                <button class="btn-icon">×</button>
+            </div>
+            <div class="panel-content">
+                <!-- This will be filled dynamically when a threat is clicked -->
+            </div>
+        </div>
+        
+        <div class="hud-bottom">
+            <div class="stats">
+                <div class="stat-item">
+                    <div id="stat-threats" class="stat-value">14</div>
+                    <div class="stat-label">Active Threats</div>
+                </div>
+                <div class="stat-item">
+                    <div id="stat-affected" class="stat-value">345m²</div>
+                    <div class="stat-label">Affected Area</div>
+                </div>
+                <div class="stat-item">
+                    <div id="stat-health" class="stat-value">87%</div>
+                    <div class="stat-label">Field Health</div>
+                </div>
+            </div>
+            <div class="zoom-controls">
+                <button class="btn-icon">+</button>
+                <button class="btn-icon">−</button>
+                <button class="btn-icon">⟳</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js and animation libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.8.0/dist/gsap.min.js"></script>
+    
+    <!-- Our application scripts (type="module" for ES modules) -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
