@@ -16,24 +16,24 @@ const satelliteImageSources = {
     },
     // Fallback imagery (static terrain maps for demonstration)
     fallback: {
-        field1: 'https://i.imgur.com/TvC5zcD.jpg', // Wheat field satellite view
-        field2: 'https://i.imgur.com/f3dvOUX.jpg', // Corn field satellite view
-        field3: 'https://i.imgur.com/5VtMqSB.jpg'  // Orchard satellite view
+        field1: '../cropimage.jpg', // Local crop image
+        field2: '../cropimage.jpg', // Local crop image
+        field3: '../cropimage.jpg'  // Local crop image
     }
 };
 
 // Default satellite imagery options to use when actual API keys aren't available
 const defaultSatelliteImages = {
-    field1: './assets/satellite-wheat-field.jpg',
-    field2: './assets/satellite-corn-field.jpg',
-    field3: './assets/satellite-orchard.jpg'
+    field1: '../cropimage.jpg',
+    field2: '../cropimage.jpg',
+    field3: '../cropimage.jpg'
 };
 
 // Normalized difference vegetation index (NDVI) imagery for vegetation health analysis
 const ndviImageSources = {
-    field1: 'https://i.imgur.com/LNt7Ijb.jpg', // Example NDVI wheat field
-    field2: 'https://i.imgur.com/Kq4Q2d8.jpg', // Example NDVI corn field
-    field3: 'https://i.imgur.com/8LCZcW9.jpg'  // Example NDVI orchard
+    field1: '../cropimage.jpg', // Using local crop image for NDVI as well
+    field2: '../cropimage.jpg', // Using local crop image for NDVI as well
+    field3: '../cropimage.jpg'  // Using local crop image for NDVI as well
 };
 
 // Load satellite imagery texture for Three.js
@@ -89,8 +89,10 @@ async function loadSatelliteTexture(fieldId, imageType = 'fallback') {
             // Load texture with THREE.TextureLoader
             const textureLoader = new THREE.TextureLoader();
             textureLoader.crossOrigin = 'anonymous';
+            // Encode URI to handle spaces in filenames
+            const encodedImageSource = imageSource.includes(' ') ? encodeURI(imageSource) : imageSource;
             textureLoader.load(
-                imageSource,
+                encodedImageSource,
                 (texture) => {
                     // Configure texture for proper field mapping
                     texture.wrapS = THREE.RepeatWrapping;
