@@ -2,7 +2,7 @@
 
 // Field class to represent agricultural fields
 class Field {
-    constructor(id, name, width, height, crops = [], threats = [], sensors = [], drones = [], satelliteData = {}) {
+    constructor(id, name, width, height, crops = [], threats = [], sensors = [], drones = []) {
         this.id = id;
         this.name = name;
         this.width = width;
@@ -11,7 +11,6 @@ class Field {
         this.threats = threats;
         this.sensors = sensors;
         this.drones = drones;
-        this.satelliteData = satelliteData;
     }
 }
 
@@ -29,15 +28,7 @@ const mockFields = {
         dronePatrol: true,
         cropPattern: 'grid',
         cropVarieties: ['wheat-standard', 'wheat-sentinel'],
-        sensorTypes: ['soil', 'weather', 'voc'],
-        satelliteData: {
-            lastUpdate: '2025-04-25',
-            provider: 'Sentinel-2',
-            resolution: '10m',
-            bands: ['RGB', 'NIR', 'SWIR'],
-            ndviAverage: 0.72,
-            imageUrl: 'https://i.imgur.com/TvC5zcD.jpg'
-        }
+        sensorTypes: ['soil', 'weather', 'voc']
     },
     field2: {
         id: 'field2',
@@ -51,37 +42,21 @@ const mockFields = {
         dronePatrol: true,
         cropPattern: 'rows',
         cropVarieties: ['corn-standard', 'corn-bt'],
-        sensorTypes: ['soil', 'acoustic', 'thermal'],
-        satelliteData: {
-            lastUpdate: '2025-04-26',
-            provider: 'Drone Imagery',
-            resolution: '5cm',
-            bands: ['RGB', 'Thermal'],
-            ndviAverage: 0.68,
-            imageUrl: 'https://i.imgur.com/f3dvOUX.jpg'
-        }
+        sensorTypes: ['soil', 'acoustic', 'thermal']
     },
     field3: {
         id: 'field3',
         name: 'East Orchard',
         width: 120,
         height: 120,
-        cropType: 'apple',
+        cropType: 'tree',
         cropDensity: 0.15,
-        threatCount: 5,
-        sensorCount: 15,
-        dronePatrol: true,
+        threatCount: 15,
+        sensorCount: 6,
+        dronePatrol: false,
         cropPattern: 'scattered',
-        cropVarieties: ['apple-honeycrisp', 'apple-gala', 'pear-bartlett'],
-        sensorTypes: ['soil', 'weather', 'moisture', 'acoustic'],
-        satelliteData: {
-            lastUpdate: '2025-04-24',
-            provider: 'Planet SkySat',
-            resolution: '0.5m',
-            bands: ['RGB', 'NIR'],
-            ndviAverage: 0.81,
-            imageUrl: 'https://i.imgur.com/5VtMqSB.jpg'
-        }
+        cropVarieties: ['apple', 'pear'],
+        sensorTypes: ['soil', 'weather', 'spectral']
     }
 };
 

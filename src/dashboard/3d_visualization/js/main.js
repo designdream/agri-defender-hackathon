@@ -3,7 +3,6 @@ import { loadFieldData, Field } from './field-data.js';
 import { initializeThreatVisualization, updateThreats } from './threat-visualization.js';
 import { initializeControls, handleControlEvents } from './ui-controls.js';
 import { initializeControllerSupport, controllerState } from './controller-support.js';
-import { loadSatelliteTexture, loadNDVITexture } from './satellite-imagery.js';
 
 // Main Three.js variables
 let scene, camera, renderer, controls;
@@ -410,55 +409,22 @@ function createFallbackModels(specificModel = null) {
 }
 
 // Render field based on field data
-async function renderField(field) {
+function renderField(field) {
     if (!field) return;
     
-    // Show loading indicator
-    showLoadingMessage('Loading satellite imagery...');
-    
-    try {
-        // Load satellite imagery texture
-        const satelliteTexture = await loadSatelliteTexture(field.id, 'fallback');
-        
-        // Create ground plane with satellite imagery
-        const planeGeometry = new THREE.PlaneGeometry(field.width, field.height);
-        const planeMaterial = new THREE.MeshStandardMaterial({
-            map: satelliteTexture,
-            side: THREE.DoubleSide,
-            roughness: 0.8,
-            metalness: 0.2,
-            // Keep minimal color influence for better satellite image visibility
-            color: 0xffffff
-        });
-        
-        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        plane.rotation.x = -Math.PI / 2;
-        plane.position.y = 0;
-        plane.receiveShadow = true;
-        scene.add(plane);
-        
-        // Hide loading indicator
-        hideLoadingMessage();
-    } catch (error) {
-        console.error('Error loading satellite imagery:', error);
-        
-        // Fallback to standard field if satellite imagery fails
-        const planeGeometry = new THREE.PlaneGeometry(field.width, field.height);
-        const planeMaterial = new THREE.MeshStandardMaterial({
-            color: 0x689F38,
-            side: THREE.DoubleSide,
-            roughness: 0.8,
-            metalness: 0.2
-        });
-        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        plane.rotation.x = -Math.PI / 2;
-        plane.position.y = 0;
-        plane.receiveShadow = true;
-        scene.add(plane);
-        
-        // Hide loading indicator
-        hideLoadingMessage();
-    }
+    // Create ground plane
+    const planeGeometry = new THREE.PlaneGeometry(field.width, field.height);
+    const planeMaterial = new THREE.MeshStandardMaterial({
+        color: 0x689F38,
+        side: THREE.DoubleSide,
+        roughness: 0.8,
+        metalness: 0.2
+    });
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.rotation.x = -Math.PI / 2;
+    plane.position.y = 0;
+    plane.receiveShadow = true;
+    scene.add(plane);
     
     // Render crops based on field data
     field.crops.forEach(crop => {
@@ -1186,30 +1152,8 @@ function clearFieldFromScene() {
     });
 }
 
-// Show or hide the loading screen
+// Show/hide loading screen
 function showLoadingScreen(show) {
-    const loadingScreen = document.getElementById('loading-screen');
-    loadingScreen.style.display = show ? 'flex' : 'none';
-}
-
-// Show a specific loading message
-function showLoadingMessage(message) {
-    const loadingText = document.querySelector('.loading-text');
-    if (loadingText) {
-        loadingText.textContent = message;
-    }
-}
-
-// Hide the loading message
-function hideLoadingMessage() {
-    const loadingText = document.querySelector('.loading-text');
-    if (loadingText) {
-        loadingText.textContent = 'Loading field data...';
-    }
-}
-
-// Show/hide loading screen with animation
-function animateLoadingScreen(show) {
     const loadingScreen = document.getElementById('loading-screen');
     appState.isLoading = show;
     

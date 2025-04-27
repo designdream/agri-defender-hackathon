@@ -39,14 +39,18 @@ The application is structured as follows:
 
 ## Key Features
 
-### 1. Multi-spectrum Threat Detection with Real Satellite Imagery
+### 1. Multi-spectrum Threat Detection
 
-AgriDefender 3D's multi-spectrum threat detection module integrates real satellite and drone imagery with sensor data for early detection of crop pathogens:
+**Feature:** Early identification system for crop pathogens using multi-parameter sensor data analysis.
 
-- **Real Satellite Imagery Integration**: Uses actual Sentinel-2, Planet SkySat, and drone imagery for field visualization
-- **NDVI Analysis**: Normalized Difference Vegetation Index processing for precise vegetation health assessment
-- **Soil Parameter Integration**: pH, moisture, and nutrient level measurements processed in real-time
-- **Multi-spectral Band Processing**: Analysis across RGB, NIR, and SWIR bands for comprehensive pathogen identification
+**Implementation:**
+- Technologies: Sensor fusion algorithms, anomaly detection systems
+- Key files: `field-data.js`, `threat-detection.js`
+- Technical specifications:
+  - Multi-parameter correlation analysis (soil chemistry, moisture, temperature)
+  - Threshold-based anomaly detection with adaptive baseline calibration
+  - Spatiotemporal pattern recognition for spread prediction
+  - Sub-surface pathogen detection capabilities via soil composition analysis
 
 ### 2. Threat Classification System
 
