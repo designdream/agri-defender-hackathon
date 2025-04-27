@@ -4,7 +4,9 @@
   <img src="patches.png" alt="Mission Patches" width="800"/>
 </div>
 
-AgriDefender 3D is a precision agriculture defense system for detecting, monitoring, and responding to crop threats. Using geospatial visualization techniques, it enables agricultural stakeholders to identify biological threats early, deploy automated drone countermeasures, and coordinate field response strategies through a comprehensive sensor network and threat intelligence platform.
+**NARD (Not Actually a Real Department)** is a figment of our collective imagination, born during a caffeine-fueled hackathon fever dream. Despite not existing, it has somehow become the most effective agricultural defense organization never to exist in reality.
+
+AgriDefender 3D is a precision agriculture defense system for detecting, monitoring, and responding to crop threats. Using geospatial visualization techniques, it enables agricultural stakeholders to identify biological threats early, deploy automated drone countermeasures, and coordinate field response strategies through a comprehensive sensor network and threat intelligence platform. All while being overseen by the completely fictional yet strangely efficient NARD organization.
 
 ## Project Overview
 
@@ -32,7 +34,7 @@ The application is structured as follows:
 │   │   │   ├── index.html    # Main 3D visualization interface
 │   │   │   └── styles.css    # Styling for the visualization interface
 ├── AgriDefender_3D.pdf       # Presentation slides
-└── NARD.png                  # NARD logo
+└── NARD.png                  # Logo of the fictional NARD organization
 ```
 
 ## Key Features
@@ -465,9 +467,23 @@ Planned agricultural defense capabilities:
 
 ## Acknowledgments
 
-- NARD (National Agricultural Research Department) for providing support and direction
+This project was developed at the National Security Hackathon (April 26-27, 2025) with support from:
+
+- [Shack15](https://www.shack15.com/) - For providing an innovative space for hackers and dreamers
+- [Cerebral Valley](https://www.cerebralvalley.ai/) - For pushing the boundaries of AI in national security
+- [Gordian Knot Center for National Security Innovation](https://gordianknot.stanford.edu/) at Stanford University
+- [SHIELD Capital](https://www.shield.vc/)
+- [SHACK15](https://www.shack15.com/)
+- [NIF Ventures](https://www.nif.vc/)
+- [IQT](https://www.iqt.org/)
+- [Scale AI](https://scale.com/)
+- [Vannevar Labs](https://www.vannevarlabs.com/)
+
+Special thanks to:
+- The completely fictional NARD (Not Actually a Real Department) for imaginary support
 - Three.js community for development resources and examples
 - Agricultural defense researchers for domain expertise
+- All the volunteers and mentors who made the hackathon possible
 
 ## License
 
