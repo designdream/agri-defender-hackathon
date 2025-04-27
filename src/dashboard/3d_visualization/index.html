@@ -16,6 +16,7 @@
             <div class="logo"><img src="../../../NARD.png" alt="NARD Logo" style="height: 100px; margin-bottom: 15px;"></div>
             <div class="spinner"></div>
             <div class="loading-text">Loading field data...</div>
+            <div class="controller-info" style="margin-top: 15px; font-size: 12px; color: #aaa;">8BitDo Micro Controller Support: Enabled</div>
         </div>
     </div>
 
@@ -139,6 +140,22 @@
                 <button class="btn-icon">−</button>
                 <button class="btn-icon">⟳</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Drone FPV View (hidden by default) -->
+    <div class="drone-fpv-view" style="display: none;">
+        <div class="fpv-header">
+            <div class="fpv-indicator">LIVE DRONE FEED</div>
+            <div class="fpv-metrics">
+                <div>ALT: <span id="drone-altitude">45</span>m</div>
+                <div>SPD: <span id="drone-speed">12</span>m/s</div>
+            </div>
+        </div>
+        <div class="fpv-crosshair">+</div>
+        <div class="fpv-footer">
+            <div class="fpv-battery">BATT: 87%</div>
+            <div class="fpv-status">SCANNING</div>
         </div>
     </div>
 

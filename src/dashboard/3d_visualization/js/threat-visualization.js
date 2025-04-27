@@ -172,7 +172,7 @@ function renderAffectedArea(threat) {
     
     // Create bubble mesh and position it
     const bubble = new THREE.Mesh(bubbleGeometry, bubbleMaterial);
-    bubble.position.set(threat.location.x, bubbleRadius * 0.15, threat.location.z); // Slightly raised
+    bubble.position.set(threat.location.x, bubbleRadius * 0.05, threat.location.z); // Positioned closer to ground
     
     // Add enhanced animation data and all threat data to make bubbles clickable
     bubble.userData = {

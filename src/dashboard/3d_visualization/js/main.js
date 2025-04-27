@@ -2,6 +2,7 @@
 import { loadFieldData, Field } from './field-data.js';
 import { initializeThreatVisualization, updateThreats } from './threat-visualization.js';
 import { initializeControls, handleControlEvents } from './ui-controls.js';
+import { initializeControllerSupport, controllerState } from './controller-support.js';
 
 // Main Three.js variables
 let scene, camera, renderer, controls;
@@ -53,6 +54,16 @@ async function init() {
     
     // Hide loading screen and begin animation loop
     showLoadingScreen(false);
+    
+    // Make camera and controls available globally for controller access
+    window.camera = camera;
+    
+    // Wait until the scene is fully rendered before initializing controller support
+    setTimeout(() => {
+        // Initialize 8BitDo Micro controller support
+        initializeControllerSupport(camera, controls, scene);
+        showToast('8BitDo Micro Controller Support Activated');
+    }, 2000);
     animate();
     
     // Handle window resize
@@ -994,6 +1005,17 @@ function updateCameraPosition(viewMode) {
     const fieldHeight = currentField.height;
     const diagonal = Math.sqrt(fieldWidth * fieldWidth + fieldHeight * fieldHeight);
     
+    // Toggle drone FPV view based on view mode
+    const droneFpvView = document.querySelector('.drone-fpv-view');
+    if (droneFpvView) {
+        droneFpvView.style.display = viewMode === 'drone' ? 'flex' : 'none';
+        
+        // Update drone metrics if in drone view
+        if (viewMode === 'drone') {
+            updateDroneMetrics();
+        }
+    }
+    
     // Smooth transition to new position with GSAP
     switch (viewMode) {
         case 'overhead':
@@ -1030,13 +1052,19 @@ function updateCameraPosition(viewMode) {
             break;
             
         case 'drone':
+            // Put camera in drone position above field
             gsap.to(camera.position, {
                 x: fieldWidth * 0.25, 
                 y: diagonal * 0.3, 
                 z: fieldHeight * 0.25,
                 duration: 1.5,
                 ease: 'power2.inOut',
-                onUpdate: () => controls.update()
+                onUpdate: () => {
+                    controls.update();
+                    if (viewMode === 'drone') {
+                        updateDroneMetrics(); // Update metrics during animation
+                    }
+                }
             });
             gsap.to(controls.target, {
                 x: 0, y: 0, z: 0,
@@ -1053,6 +1081,23 @@ function updateCameraPosition(viewMode) {
     } else {
         controls.maxPolarAngle = Math.PI / 2 - 0.1; // Restrict to not go below ground
         controls.minDistance = 5;
+    }
+}
+
+// Update drone metrics for the FPV display
+function updateDroneMetrics() {
+    // Get drone altitude (camera y position)
+    const altitude = Math.round(camera.position.y);
+    const altitudeElement = document.getElementById('drone-altitude');
+    if (altitudeElement) {
+        altitudeElement.textContent = altitude;
+    }
+    
+    // Calculate drone speed (simulated based on movement or random for demo)
+    const speed = Math.floor(Math.random() * 5) + 10; // Random speed between 10-15 m/s for demo
+    const speedElement = document.getElementById('drone-speed');
+    if (speedElement) {
+        speedElement.textContent = speed;
     }
 }
 

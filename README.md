@@ -1,19 +1,20 @@
 <div align="center">
   <img src="NARD.png" alt="NARD Logo" width="400"/>
-  <h1>AgriDefender 3D - Agricultural Threat Visualization System</h1>
+  <h1>AgriDefender 3D - Agricultural Threat Detection & Response System</h1>
+  <img src="patches.png" alt="Mission Patches" width="800"/>
 </div>
 
-AgriDefender 3D is an immersive visualization system for detecting, monitoring, and responding to agricultural biological threats. Using Three.js 3D visualization, it provides farmers and agricultural authorities with an intuitive visual interface for protecting crops through interactive field visualization, automated drone patrols, threat identification, and sensor network monitoring.
+AgriDefender 3D is a precision agriculture defense system for detecting, monitoring, and responding to crop threats. Using geospatial visualization techniques, it enables agricultural stakeholders to identify biological threats early, deploy automated drone countermeasures, and coordinate field response strategies through a comprehensive sensor network and threat intelligence platform.
 
 ## Project Overview
 
-AgriDefender 3D provides an immersive and intuitive visualization platform with the following key features:
+AgriDefender 3D provides a comprehensive crop defense platform with the following technical capabilities:
 
-1. **3D Field Visualization** - Interactive, photorealistic representation of agricultural fields with crop health indicators
-2. **Threat Detection & Representation** - Visually stunning 3D bubble visualization of detected threats with severity indicators
-3. **Automated Drone Patrols** - Visual representation of autonomous drone flights for continuous monitoring
-4. **Sensor Network Monitoring** - Interactive sensor placement and real-time data visualization
-5. **Interactive Navigation** - First-person exploration using keyboard controls for immersive field inspection
+1. **Multi-spectrum Threat Detection** - Sensor fusion technology integrating soil readings, optical data, and environmental parameters for early pathogen identification
+2. **Threat Classification System** - Machine learning-based pathogen identification (bacterial, fungal, viral, pest) with severity assessment algorithms
+3. **Automated Countermeasure Deployment** - Precision drone deployment system with treatment delivery capabilities based on threat assessment
+4. **Distributed Sensor Network** - Multi-node sensor grid for continuous field monitoring with anomaly detection algorithms
+5. **Geospatial Defense Planning** - Tactical response visualization with containment zone mapping and treatment effectiveness tracking
 
 ## Architecture
 
@@ -36,66 +37,70 @@ The application is structured as follows:
 
 ## Key Features
 
-### 1. 3D Field Visualization
+### 1. Multi-spectrum Threat Detection
 
-**Feature:** Interactive 3D representation of agricultural fields with accurately placed crops, boundaries, and terrain features.
-
-**Implementation:**
-- Technologies: Three.js, WebGL, GSAP animations
-- Key files: `field-data.js`, `main.js`
-- Features:
-  - Photorealistic crop rendering
-  - Terrain elevation and texture mapping
-  - Day/night cycle with dynamic lighting
-  - Multiple view modes (overhead, first-person, drone)
-
-### 2. Interactive 3D Threat Bubbles
-
-**Feature:** Visually striking 3D glass-like bubbles that represent detected threats on the field, with color-coding for different threat types.
+**Feature:** Early identification system for crop pathogens using multi-parameter sensor data analysis.
 
 **Implementation:**
-- Technologies: Three.js MeshPhysicalMaterial with glass effects
-- Key file: `threat-visualization.js`
-- Features:
-  - Pulsing animations with dynamic opacity and scale
-  - Color coding by threat type (fungal, bacterial, viral, pest)
-  - Clickable bubbles that reveal detailed threat information
-  - Floating and bobbing effects for enhanced visibility
+- Technologies: Sensor fusion algorithms, anomaly detection systems
+- Key files: `field-data.js`, `threat-detection.js`
+- Technical specifications:
+  - Multi-parameter correlation analysis (soil chemistry, moisture, temperature)
+  - Threshold-based anomaly detection with adaptive baseline calibration
+  - Spatiotemporal pattern recognition for spread prediction
+  - Sub-surface pathogen detection capabilities via soil composition analysis
 
-### 3. Automated Drone Patrol Visualization
+### 2. Threat Classification System
 
-**Feature:** Visual representation of autonomous drone flight paths and real-time monitoring activities.
-
-**Implementation:**
-- Key files: `main.js` (animateDrone function)
-- Features:
-  - Smooth path interpolation between waypoints
-  - Animated rotors and realistic flight physics
-  - Auto-orienting to direction of travel
-  - Subtle bobbing motion for realism
-
-### 4. Sensor Network
-
-**Feature:** Interactive representation of field sensors that monitor environmental conditions and detect threats.
+**Feature:** Machine learning-based identification and classification of agricultural threats with severity assessment.
 
 **Implementation:**
-- Key files: `field-data.js` (sensor generation), `main.js` (renderSensors function)
-- Features:
-  - Multiple sensor types with distinctive models
-  - Interactive tooltips showing sensor data
-  - Visual indicators for sensor state
+- Technologies: Convolutional neural networks, classification algorithms
+- Key file: `threat-classification.js`
+- Technical specifications:
+  - Multi-class pathogen identification (bacterial, fungal, viral, arthropod)
+  - Severity quantification using gradient-based assessment (low, medium, high)
+  - Confidence scoring with uncertainty estimation
+  - Taxonomic classification with species-level identification capabilities
 
-### 5. Immersive First-Person Navigation
+### 3. Automated Countermeasure Deployment
 
-**Feature:** Video game-style keyboard navigation allowing users to explore the field from a first-person perspective.
+**Feature:** Precision drone-based agricultural defense system with autonomous treatment delivery capabilities.
 
 **Implementation:**
-- Key files: `main.js` (keyboardControls)
-- Controls:
-  - WASD: Move forward/back/left/right
-  - Q/E: Rotate left/right
-  - Space/Shift: Move up/down
-  - Ctrl: Sprint
+- Key files: `drone-control.js`, `countermeasure-deployment.js`
+- Technical specifications:
+  - Path optimization algorithms for efficient field coverage
+  - Treatment delivery system with precision application capabilities
+  - Dynamic mission planning based on threat severity and distribution
+  - Autonomous obstacle avoidance and weather condition adaptation
+  - Real-time telemetry for operational monitoring
+
+### 4. Distributed Sensor Network
+
+**Feature:** Multi-node field monitoring system with distributed intelligence for continuous agricultural surveillance.
+
+**Implementation:**
+- Key files: `sensor-network.js`, `data-aggregation.js`
+- Technical specifications:
+  - Heterogeneous sensor array (soil chemistry, moisture, temperature, optical)
+  - Mesh network architecture with redundant communication pathways
+  - Edge computing capabilities for localized data processing
+  - Power optimization algorithms for extended deployment longevity
+  - Data compression and prioritization for bandwidth efficiency
+
+### 5. Geospatial Defense Planning
+
+**Feature:** Tactical response coordination system with containment strategies and treatment effectiveness monitoring.
+
+**Implementation:**
+- Key files: `defense-planning.js`, `containment-strategies.js`
+- Technical specifications:
+  - Quarantine zone calculation based on pathogen transmission characteristics
+  - Treatment protocol selection system with efficacy prediction
+  - Multi-stage response planning for progressive containment
+  - Resource allocation optimization for defensive operations
+  - Impact assessment algorithms for defensive strategy evaluation
 
 ## Getting Started
 
@@ -122,12 +127,12 @@ python -m http.server 9000
 http://localhost:9000/src/dashboard/3d_visualization/index.html
 ```
 
-### Navigation
+### System Operation
 
-1. Use the View Mode controls to switch between Overhead, First Person, and Drone views
-2. In First Person mode, use keyboard controls (WASD, Q/E, Space/Shift) to navigate
-3. Click on 3D threat bubbles to view detailed information about detected threats
-4. Click on sensors to see their current readings and status
+1. Use the View Mode controls to switch between Tactical Overview, Field Inspection, and Drone Monitoring views
+2. For field navigation, the system supports the 8BitDo Micro gaming controller in keyboard mode
+3. Select detected threats to access detailed pathogen information and treatment protocols
+4. Interact with sensors to view environmental parameters and system diagnostics
 
 ## Technologies Used
 
@@ -140,45 +145,64 @@ http://localhost:9000/src/dashboard/3d_visualization/index.html
 
 ## Technical Highlights
 
-### Advanced Material Effects
+### Pathogen Detection Algorithms
 
-The 3D threat bubbles use advanced Three.js MeshPhysicalMaterial properties to create realistic glass-like effects:
+The threat detection system uses sophisticated algorithms to identify potential crop pathogens based on multi-parameter analysis:
 
 ```javascript
-const bubbleMaterial = new THREE.MeshPhysicalMaterial({
-    color: color,
-    transparent: true,
-    opacity: 0.5,
-    metalness: 0.2,
-    roughness: 0.1,
-    transmission: 0.8, // Glass-like transparency
-    thickness: 0.8,    // Glass thickness
-    envMapIntensity: 1.5,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.1,
-    side: THREE.DoubleSide,
-    emissive: emissiveColor, // Add glow
-    emissiveIntensity: 0.3   // Subtle glow
-});
+function analyzePathogenProbability(sensorData) {
+    // Extract key indicators from sensor data
+    const { moisture, temperature, pH, conductivity, nitrogen } = sensorData.readings;
+    
+    // Calculate environmental favorability for different pathogen types
+    const bacterialFavorability = calculateBacterialGrowthPotential(temperature, moisture, pH);
+    const fungalFavorability = calculateFungalGrowthPotential(temperature, moisture);
+    const viralTransmissionRisk = calculateViralTransmissionRisk(temperature, moisture, nitrogen);
+    
+    // Analyze chemical composition indicators
+    const chemicalAnomalies = detectChemicalAnomalies(pH, conductivity, nitrogen);
+    
+    // Correlate indicators to determine threat probability
+    return {
+        bacterialThreatProbability: bacterialFavorability * chemicalAnomalies.bacterial,
+        fungalThreatProbability: fungalFavorability * chemicalAnomalies.fungal,
+        viralThreatProbability: viralTransmissionRisk * chemicalAnomalies.viral,
+        confidence: calculateConfidenceScore(sensorData)
+    };
+}
 ```
 
-### Animation System
+### Containment Zone Calculation
 
-All animations use request animation frame for performance and smooth movement, with time-based animations instead of frame-based for consistency across devices:
+The system uses epidemiological models to determine optimal containment strategies based on pathogen characteristics:
 
 ```javascript
-function animateAffectedArea(areaObj) {
-    // Calculate sine wave value for smooth oscillation
-    const sineWave = (Math.sin(pulse.time) * 0.5 + 0.5);
+function calculateContainmentParameters(threat) {
+    // Retrieve pathogen-specific transmission parameters
+    const pathogenProfile = getPathogenProfile(threat.type);
     
-    // Apply scale animation
-    const scale = pulse.minScale + (pulse.maxScale - pulse.minScale) * sineWave;
-    areaObj.scale.set(scale, scale, scale);
+    // Calculate spread rate based on environmental conditions
+    const baseReproductionNumber = pathogenProfile.baseReproductionRate;
+    const environmentalModifier = calculateEnvironmentalModifier(
+        currentField.moisture, 
+        currentField.temperature, 
+        currentField.plantDensity
+    );
     
-    // Add subtle bobbing motion
-    areaObj.position.y = Math.sin(pulse.time * 0.7) * 0.05;
+    // Determine effective reproduction number
+    const effectiveReproductionNumber = baseReproductionNumber * environmentalModifier;
     
-    requestAnimationFrame(animate);
+    // Calculate minimum containment radius using epidemiological model
+    const minContainmentRadius = Math.sqrt(threat.affectedArea / Math.PI) * 
+                               (1 + effectiveReproductionNumber) * 
+                               pathogenProfile.safetyFactor;
+    
+    return {
+        recommendedRadius: minContainmentRadius,
+        treatmentProtocol: selectTreatmentProtocol(threat.type, threat.severity),
+        requiredResources: calculateResourceRequirements(minContainmentRadius, threat.type),
+        estimatedContainmentTime: calculateContainmentTime(threat, effectiveReproductionNumber)
+    };
 }
 ```
 
@@ -431,13 +455,13 @@ function initializeRealTimeUpdates() {
 
 ## Future Enhancements
 
-Planned features for future development:
+Planned agricultural defense capabilities:
 
-1. **Real-time Data Integration**: Connect to actual field sensor APIs for live data visualization
-2. **AI Threat Prediction**: Integrate machine learning models to predict threat spread
-3. **VR Support**: Add WebXR API support for fully immersive VR field exploration
-4. **Advanced Weather System**: Dynamic weather visualization with impact on threat development
-5. **Collaborative Field Inspection**: Multi-user support for team-based field monitoring
+1. **Predictive Pathogen Modeling**: Neural network-based prediction of outbreak probability using historical and environmental data
+2. **Automated Biological Control Deployment**: Integration with beneficial organism deployment systems for sustainable pest management
+3. **Genomic Analysis Module**: Pathogen strain identification through field-deployable genomic sequencing
+4. **Chemical Resistance Prediction**: Machine learning algorithms to assess potential treatment resistance and recommend mitigation strategies
+5. **Satellite Integration**: Fusion of satellite imagery with ground sensor data for macro-level threat detection
 
 ## Acknowledgments
 
