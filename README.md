@@ -1,15 +1,19 @@
-# AgriDefender - Agricultural Biological Threat Detection System
+<div align="center">
+  <img src="NARD.png" alt="NARD Logo" width="400"/>
+  <h1>AgriDefender 3D - Agricultural Threat Visualization System</h1>
+</div>
 
-AgriDefender is a comprehensive system for detecting, monitoring, predicting, and responding to biological threats to agriculture. This application integrates cutting-edge research concepts from agricultural defense studies to provide farmers and agricultural authorities with powerful tools for protecting crops.
+AgriDefender 3D is an immersive visualization system for detecting, monitoring, and responding to agricultural biological threats. Using Three.js 3D visualization, it provides farmers and agricultural authorities with an intuitive visual interface for protecting crops through interactive field visualization, automated drone patrols, threat identification, and sensor network monitoring.
 
 ## Project Overview
 
-AgriDefender combines multiple defense strategies into a unified platform:
+AgriDefender 3D provides an immersive and intuitive visualization platform with the following key features:
 
-1. **Early Detection** - Sensors, image analysis, and community reporting to identify threats at their earliest stages
-2. **Predictive Modeling** - LSTM-based neural networks to forecast how pathogens might spread
-3. **Response Coordination** - Containment protocols and community alerts to minimize impact
-4. **Natural Defense** - Companion planting strategies to build resilience against threats
+1. **3D Field Visualization** - Interactive, photorealistic representation of agricultural fields with crop health indicators
+2. **Threat Detection & Representation** - Visually stunning 3D bubble visualization of detected threats with severity indicators
+3. **Automated Drone Patrols** - Visual representation of autonomous drone flights for continuous monitoring
+4. **Sensor Network Monitoring** - Interactive sensor placement and real-time data visualization
+5. **Interactive Navigation** - First-person exploration using keyboard controls for immersive field inspection
 
 ## Architecture
 
@@ -17,176 +21,164 @@ The application is structured as follows:
 
 ```
 ├── src/
-│   ├── api/                 # FastAPI backend
-│   │   ├── routes/          # API endpoints for different features
-│   │   └── models.py        # Data models
-│   ├── dashboard/           # Streamlit frontend
-│   │   ├── components/      # UI components for different features  
-│   │   └── app.py           # Main dashboard application
-│   ├── models/              # ML models for prediction and analysis
-│   └── processing/          # Data processing pipelines
-├── tests/                   # Test cases
-├── research/                # Research materials and references
-└── docs/                    # Documentation
+│   ├── dashboard/           
+│   │   ├── 3d_visualization/  # Three.js 3D visualization
+│   │   │   ├── js/           # JavaScript modules for visualization
+│   │   │   │   ├── field-data.js        # Field, threat, drone & sensor data generation
+│   │   │   │   ├── main.js              # Core Three.js setup and rendering
+│   │   │   │   ├── threat-visualization.js # Threat visualization with 3D bubbles
+│   │   │   │   └── ui-controls.js       # User interface and control handling
+│   │   │   ├── index.html    # Main 3D visualization interface
+│   │   │   └── styles.css    # Styling for the visualization interface
+├── AgriDefender_3D.pdf       # Presentation slides
+└── NARD.png                  # NARD logo
 ```
-
-## Research Implementation
-
-AgriDefender incorporates several key research concepts from the agricultural defense hackathon:
-
-### 1. AI Diagnostic Assistant (Image Analysis)
-
-**Research Concept:** A mobile application using machine learning to identify plant diseases from smartphone photos, providing immediate diagnostic information and treatment recommendations.
-
-**Implementation:**
-- API endpoint: `/api/v1/threats/image-analysis`
-- Frontend: `dashboard/components/image_analysis.py`
-- Features:
-  - Image upload and analysis
-  - Threat identification with confidence scores
-  - Treatment recommendations
-  - Integration with containment planning and community alerts
-
-### 2. Blockchain Biosecurity Ledger
-
-**Research Concept:** A transparent, immutable record-keeping system using blockchain technology to track agricultural inputs, disease occurrences, and treatments.
-
-**Implementation:**
-- API endpoint: `/api/v1/threats/verify-report`
-- Integration: Embedded within the image analysis and threat reporting workflows
-- Features:
-  - Verification of threat reports
-  - Immutable record of detection and response actions
-  - Transaction tracking for auditing and traceability
-
-### 3. Crowdsourced Disease Mapping & Community Alert System
-
-**Research Concept:** A collaborative platform allowing farmers to report disease occurrences and alert nearby farmers about emerging threats.
-
-**Implementation:**
-- API endpoint: `/api/v1/threats/community-alert`
-- Frontend: Integrated within image analysis component
-- Features:
-  - Geofenced alert distribution
-  - Multi-channel notifications (SMS, email, app)
-  - Estimated recipient calculation
-
-### 4. Rapid Containment Protocol
-
-**Research Concept:** An automated system that implements immediate quarantine and treatment measures upon disease detection.
-
-**Implementation:**
-- API endpoint: `/api/v1/threats/{threat_id}/containment-plan`
-- Frontend: Containment plan display within image analysis workflow
-- Features:
-  - Prioritized immediate actions
-  - Follow-up action schedules
-  - Equipment requirements
-  - Step-by-step containment guidance
-
-### 5. Companion Planting Optimizer
-
-**Research Concept:** An AI-driven planning tool that designs optimal combinations of plants to naturally suppress pests and diseases.
-
-**Implementation:**
-- API endpoint: `/api/v1/threats/companion-plants`
-- Frontend: `dashboard/components/companion_planting.py`
-- Features:
-  - Crop and threat-specific recommendations
-  - Compatibility scoring
-  - Visual planting pattern diagram
-  - Seasonal timing information
-  - Downloadable implementation plans
 
 ## Key Features
 
-### Threat Detection and Monitoring
-- Real-time data collection from various sensor types
-- Image-based disease identification
-- Manual and automated threat reporting
-- Geospatial visualization of threats
+### 1. 3D Field Visualization
 
-### Predictive Analytics
-- Pathogen spread prediction using LSTM neural networks
-- Time-series forecasting
-- GeoJSON visualization of predicted affected areas
-- Confidence scoring for predictions
+**Feature:** Interactive 3D representation of agricultural fields with accurately placed crops, boundaries, and terrain features.
 
-### Response Coordination
-- Automated containment protocols
-- Community alerting system
-- Treatment recommendations
-- Equipment and resource planning
+**Implementation:**
+- Technologies: Three.js, WebGL, GSAP animations
+- Key files: `field-data.js`, `main.js`
+- Features:
+  - Photorealistic crop rendering
+  - Terrain elevation and texture mapping
+  - Day/night cycle with dynamic lighting
+  - Multiple view modes (overhead, first-person, drone)
 
-### Natural Defense Strategies
-- Companion planting recommendations
-- Planting pattern visualization
-- Seasonal timing guidance
-- Protection level estimation
+### 2. Interactive 3D Threat Bubbles
+
+**Feature:** Visually striking 3D glass-like bubbles that represent detected threats on the field, with color-coding for different threat types.
+
+**Implementation:**
+- Technologies: Three.js MeshPhysicalMaterial with glass effects
+- Key file: `threat-visualization.js`
+- Features:
+  - Pulsing animations with dynamic opacity and scale
+  - Color coding by threat type (fungal, bacterial, viral, pest)
+  - Clickable bubbles that reveal detailed threat information
+  - Floating and bobbing effects for enhanced visibility
+
+### 3. Automated Drone Patrol Visualization
+
+**Feature:** Visual representation of autonomous drone flight paths and real-time monitoring activities.
+
+**Implementation:**
+- Key files: `main.js` (animateDrone function)
+- Features:
+  - Smooth path interpolation between waypoints
+  - Animated rotors and realistic flight physics
+  - Auto-orienting to direction of travel
+  - Subtle bobbing motion for realism
+
+### 4. Sensor Network
+
+**Feature:** Interactive representation of field sensors that monitor environmental conditions and detect threats.
+
+**Implementation:**
+- Key files: `field-data.js` (sensor generation), `main.js` (renderSensors function)
+- Features:
+  - Multiple sensor types with distinctive models
+  - Interactive tooltips showing sensor data
+  - Visual indicators for sensor state
+
+### 5. Immersive First-Person Navigation
+
+**Feature:** Video game-style keyboard navigation allowing users to explore the field from a first-person perspective.
+
+**Implementation:**
+- Key files: `main.js` (keyboardControls)
+- Controls:
+  - WASD: Move forward/back/left/right
+  - Q/E: Rotate left/right
+  - Space/Shift: Move up/down
+  - Ctrl: Sprint
 
 ## Getting Started
 
 ### Prerequisites
-- Python 3.8+
-- Docker and Docker Compose (for containerized deployment)
+
+- Modern web browser with WebGL support (Chrome, Firefox, Edge recommended)
+- Basic HTTP server capability (Python's built-in server or equivalent)
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/defense-hackathon.git
-cd defense-hackathon
+git clone https://github.com/designdream/agri-defender-hackathon.git
+cd agri-defender-hackathon
 ```
 
-2. Install dependencies:
+2. Start a local web server:
 ```bash
-pip install -r requirements.txt
+python -m http.server 9000
 ```
 
-3. Start the application using Docker Compose:
-```bash
-docker-compose up
+3. Open your browser and navigate to:
+```
+http://localhost:9000/src/dashboard/3d_visualization/index.html
 ```
 
-4. Access the dashboard at http://localhost:8501 and the API at http://localhost:8000
+### Navigation
 
-### Development Setup
+1. Use the View Mode controls to switch between Overhead, First Person, and Drone views
+2. In First Person mode, use keyboard controls (WASD, Q/E, Space/Shift) to navigate
+3. Click on 3D threat bubbles to view detailed information about detected threats
+4. Click on sensors to see their current readings and status
 
-1. Start the API server:
-```bash
-cd src
-python -m api.main
+## Technologies Used
+
+- **Three.js**: Core 3D visualization engine for rendering fields, threats, drones, and sensors
+- **JavaScript ES6+**: Modern JavaScript with modules for code organization
+- **GSAP (GreenSock Animation Platform)**: Advanced animation for smooth transitions and effects
+- **WebGL**: Hardware-accelerated graphics rendering for performance
+- **CSS3**: Styling with advanced effects including backdrop filters
+- **HTML5**: Semantic markup for the interface structure
+
+## Technical Highlights
+
+### Advanced Material Effects
+
+The 3D threat bubbles use advanced Three.js MeshPhysicalMaterial properties to create realistic glass-like effects:
+
+```javascript
+const bubbleMaterial = new THREE.MeshPhysicalMaterial({
+    color: color,
+    transparent: true,
+    opacity: 0.5,
+    metalness: 0.2,
+    roughness: 0.1,
+    transmission: 0.8, // Glass-like transparency
+    thickness: 0.8,    // Glass thickness
+    envMapIntensity: 1.5,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.1,
+    side: THREE.DoubleSide,
+    emissive: emissiveColor, // Add glow
+    emissiveIntensity: 0.3   // Subtle glow
+});
 ```
 
-2. In a separate terminal, start the Streamlit dashboard:
-```bash
-cd src
-streamlit run dashboard/app.py
-```
+### Animation System
 
-## Next Steps and Future Enhancements
+All animations use request animation frame for performance and smooth movement, with time-based animations instead of frame-based for consistency across devices:
 
-### Live API Integration
-- Replace mock data with actual API calls
-- Implement proper error handling for API failures
-- Add caching for performance optimization
-
-### ML Model Development
-- Train computer vision models on plant disease datasets
-- Implement actual blockchain verification
-- Create real companion planting optimization algorithms
-
-## Machine Learning Implementation Guide
-
-To fully realize the potential of the research concepts, several ML models need to be developed:
-
-### 1. Plant Disease Identification Model
-
-**Purpose:** Enable the AI Diagnostic Assistant to accurately identify plant diseases from images
-
-**Suggested Approach:**
-- **Architecture:** Convolutional Neural Network (CNN) such as ResNet50 or EfficientNet
-- **Training Data:** Large dataset of labeled plant disease images (50,000+ images)
+```javascript
+function animateAffectedArea(areaObj) {
+    // Calculate sine wave value for smooth oscillation
+    const sineWave = (Math.sin(pulse.time) * 0.5 + 0.5);
+    
+    // Apply scale animation
+    const scale = pulse.minScale + (pulse.maxScale - pulse.minScale) * sineWave;
+    areaObj.scale.set(scale, scale, scale);
+    
+    // Add subtle bobbing motion
+    areaObj.position.y = Math.sin(pulse.time * 0.7) * 0.05;
+    
+    requestAnimationFrame(animate);
 - **Features:** 
   - Multi-class classification for different disease types
   - Confidence scoring

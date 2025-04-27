@@ -36,6 +36,7 @@ async function init() {
     setupLighting();
     setupHelpers();
     initializeControls(appState, onControlsChanged);
+    setupEventListeners();
     await loadModels();
     
     // Load field data 
@@ -93,9 +94,32 @@ function setupThreeJS() {
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
     
-    // Add event listeners for interaction
-    renderer.domElement.addEventListener('mousemove', onMouseMove);
-    renderer.domElement.addEventListener('click', onMouseClick);
+    // Handlers
+    window.addEventListener('resize', onWindowResize);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('click', onMouseClick);
+}
+
+// Setup additional event listeners
+function setupEventListeners() {
+    // Close threat info panel when close button is clicked
+    const closeButton = document.querySelector('.threat-info-panel .close-panel');
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            document.querySelector('.threat-info-panel').style.display = 'none';
+            
+            // Reset selection if there was one
+            if (appState.selectedObject) {
+                appState.selectedObject.traverse(child => {
+                    if (child.isMesh && child._selectionColor) {
+                        child.material.color.copy(child._selectionColor);
+                        delete child._selectionColor;
+                    }
+                });
+                appState.selectedObject = null;
+            }
+        });
+    }
 }
 
 // Set up lighting for the scene

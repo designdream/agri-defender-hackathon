@@ -13,7 +13,7 @@
 
     <div id="loading-screen">
         <div class="loading-content">
-            <div class="logo">AgriDefender 3D</div>
+            <div class="logo"><img src="../../../NARD.png" alt="NARD Logo" style="height: 100px; margin-bottom: 15px;"></div>
             <div class="spinner"></div>
             <div class="loading-text">Loading field data...</div>
         </div>
@@ -21,7 +21,7 @@
 
     <div id="hud">
         <div class="hud-top">
-            <div class="logo-small">AgriDefender</div>
+            <div class="logo-small"><img src="../../../NARD.png" alt="NARD Logo" style="height: 120px; margin: 10px 0;"></div>
             <div class="date-time">April 27, 2025 | 07:54 AM</div>
             <div class="weather-info">
                 <span>72°F</span>
@@ -139,6 +139,17 @@
                 <button class="btn-icon">−</button>
                 <button class="btn-icon">⟳</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Threat Information Panel (hidden by default) -->
+    <div class="threat-info-panel" style="display: none;">
+        <div class="panel-header">
+            <h3>Threat Details</h3>
+            <button class="btn-icon close-panel">×</button>
+        </div>
+        <div class="panel-content">
+            <!-- Content will be added dynamically -->
         </div>
     </div>
 
