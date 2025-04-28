@@ -3,6 +3,7 @@ import { loadFieldData, Field } from './field-data.js';
 import { initializeThreatVisualization, updateThreats } from './threat-visualization.js';
 import { initializeControls, handleControlEvents } from './ui-controls.js';
 import { initializeControllerSupport, controllerState } from './controller-support.js';
+import { loadSatelliteTexture } from './satellite-imagery.js';
 
 // Main Three.js variables
 let scene, camera, renderer, controls;
@@ -409,17 +410,22 @@ function createFallbackModels(specificModel = null) {
 }
 
 // Render field based on field data
-function renderField(field) {
+async function renderField(field) {
     if (!field) return;
     
-    // Create ground plane
+    // Create ground plane with satellite imagery texture
     const planeGeometry = new THREE.PlaneGeometry(field.width, field.height);
+    
+    // Load satellite imagery texture
+    const satelliteTexture = await loadSatelliteTexture(field.id, 'fallback');
+    
     const planeMaterial = new THREE.MeshStandardMaterial({
-        color: 0x689F38,
+        map: satelliteTexture,
         side: THREE.DoubleSide,
         roughness: 0.8,
         metalness: 0.2
     });
+    
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = -Math.PI / 2;
     plane.position.y = 0;
