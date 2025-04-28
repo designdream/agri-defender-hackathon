@@ -1,8 +1,8 @@
 <div align="center">
   <img src="NARD.png" alt="NARD Logo" width="400"/>
   <h1>AgriDefender 3D - Agricultural Threat Detection & Response System</h1>
-  <img src="patches.png" alt="Mission Patches" width="800"/>
   <h2><a href="https://designdream.github.io/agri-defender-hackathon/" target="_blank">🚀 Live Demo</a> | <a href="https://app.typeset.com/play/NP094O/embed" target="_blank">📊 View Presentation Deck</a></h2>
+  <img src="patches.png" alt="Mission Patches" width="800"/>
 </div>
 
 **NARD (Not Actually a Real Department)** is a figment of our collective imagination, born during a caffeine-fueled hackathon fever dream. Despite not existing, it has somehow become the most effective agricultural defense organization never to exist in reality.
