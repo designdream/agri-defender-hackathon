@@ -483,32 +483,37 @@ function renderSensors(field) {
 
 // Create a visual representation of a sensor based on its type
 function createSensorMesh(sensor) {
+    // Make sensors 5x larger by increasing dimensions
+    const sensorScaleFactor = 5.0;
     const { type, height, color, shape, radius } = sensor;
+    const scaledHeight = height * sensorScaleFactor;
+    const scaledRadius = radius * sensorScaleFactor;
+    
     const sensorGroup = new THREE.Group();
     let mainGeometry, mainMaterial, mainMesh;
     
     // Create the main sensor body based on shape
     switch(shape) {
         case 'cylinder':
-            mainGeometry = new THREE.CylinderGeometry(radius, radius, height, 8);
+            mainGeometry = new THREE.CylinderGeometry(scaledRadius, scaledRadius, scaledHeight, 8);
             break;
         case 'pole':
-            mainGeometry = new THREE.CylinderGeometry(radius/3, radius, height, 8);
+            mainGeometry = new THREE.CylinderGeometry(scaledRadius/3, scaledRadius, scaledHeight, 8);
             break;
         case 'sphere':
-            mainGeometry = new THREE.SphereGeometry(radius, 16, 16);
+            mainGeometry = new THREE.SphereGeometry(scaledRadius, 16, 16);
             break;
         case 'cone':
-            mainGeometry = new THREE.ConeGeometry(radius, height, 8);
+            mainGeometry = new THREE.ConeGeometry(scaledRadius, scaledHeight, 8);
             break;
         case 'box':
-            mainGeometry = new THREE.BoxGeometry(radius*2, height, radius*2);
+            mainGeometry = new THREE.BoxGeometry(scaledRadius*2, scaledHeight, scaledRadius*2);
             break;
         case 'pyramid':
-            mainGeometry = new THREE.ConeGeometry(radius, height, 4);
+            mainGeometry = new THREE.ConeGeometry(scaledRadius, scaledHeight, 4);
             break;
         default:
-            mainGeometry = new THREE.CylinderGeometry(radius, radius, height, 8);
+            mainGeometry = new THREE.CylinderGeometry(scaledRadius, scaledRadius, scaledHeight, 8);
     }
     
     // Create material with sensor color
@@ -520,25 +525,25 @@ function createSensorMesh(sensor) {
     
     mainMesh = new THREE.Mesh(mainGeometry, mainMaterial);
     mainMesh.castShadow = true;
-    mainMesh.position.y = height / 2;
+    mainMesh.position.y = scaledHeight / 2;
     sensorGroup.add(mainMesh);
     
     // Add indicator light
-    const lightGeometry = new THREE.SphereGeometry(radius/3, 8, 8);
+    const lightGeometry = new THREE.SphereGeometry(scaledRadius/3, 8, 8);
     const lightMaterial = new THREE.MeshBasicMaterial({ 
         color: sensor.status === 'active' ? 0x00FF00 : 0xFF0000,
         emissive: sensor.status === 'active' ? 0x00FF00 : 0xFF0000,
         emissiveIntensity: 0.5
     });
     const light = new THREE.Mesh(lightGeometry, lightMaterial);
-    light.position.y = height + radius/3;
+    light.position.y = scaledHeight + scaledRadius/3;
     sensorGroup.add(light);
     
     // Add small base
-    const baseGeometry = new THREE.CylinderGeometry(radius*1.2, radius*1.5, 0.2, 8);
+    const baseGeometry = new THREE.CylinderGeometry(scaledRadius*1.2, scaledRadius*1.5, 0.2*sensorScaleFactor, 8);
     const baseMaterial = new THREE.MeshStandardMaterial({ color: 0x333333 });
     const base = new THREE.Mesh(baseGeometry, baseMaterial);
-    base.position.y = 0.1;
+    base.position.y = 0.1*sensorScaleFactor;
     sensorGroup.add(base);
     
     return sensorGroup;
