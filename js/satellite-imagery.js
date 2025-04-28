@@ -16,9 +16,9 @@ const satelliteImageSources = {
     },
     // Fallback imagery (static terrain maps for demonstration)
     fallback: {
-        field1: '../cropimage.jpg', // Local crop image
-        field2: '../cropimage.jpg', // Local crop image
-        field3: '../cropimage.jpg'  // Local crop image
+        field1: './cropimage.jpg', // Local crop image
+        field2: './cropimage.jpg', // Local crop image
+        field3: './cropimage.jpg'  // Local crop image
     }
 };
 
@@ -31,9 +31,9 @@ const defaultSatelliteImages = {
 
 // Normalized difference vegetation index (NDVI) imagery for vegetation health analysis
 const ndviImageSources = {
-    field1: '../cropimage.jpg', // Using local crop image for NDVI as well
-    field2: '../cropimage.jpg', // Using local crop image for NDVI as well
-    field3: '../cropimage.jpg'  // Using local crop image for NDVI as well
+    field1: './cropimage.jpg', // Using local crop image for NDVI as well
+    field2: './cropimage.jpg', // Using local crop image for NDVI as well
+    field3: './cropimage.jpg'  // Using local crop image for NDVI as well
 };
 
 // Load satellite imagery texture for Three.js
