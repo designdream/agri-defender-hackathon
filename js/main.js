@@ -413,11 +413,34 @@ function createFallbackModels(specificModel = null) {
 async function renderField(field) {
     if (!field) return;
     
-    // Create ground plane with satellite imagery texture
+    // Create ground plane with direct cropimage.jpg texture
     const planeGeometry = new THREE.PlaneGeometry(field.width, field.height);
     
-    // Load satellite imagery texture
-    const satelliteTexture = await loadSatelliteTexture(field.id, 'fallback');
+    // Directly load cropimage.jpg texture
+    const textureLoader = new THREE.TextureLoader();
+    const satelliteTexture = await new Promise((resolve) => {
+        textureLoader.load(
+            'cropimage.jpg',  // Direct reference to the file
+            (texture) => {
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(1, 1);
+                resolve(texture);
+            },
+            undefined,
+            (error) => {
+                console.error('Error loading cropimage.jpg:', error);
+                // Create a fallback texture on error
+                const canvas = document.createElement('canvas');
+                canvas.width = 1024;
+                canvas.height = 1024;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#689F38';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                resolve(new THREE.CanvasTexture(canvas));
+            }
+        );
+    });
     
     const planeMaterial = new THREE.MeshStandardMaterial({
         map: satelliteTexture,
