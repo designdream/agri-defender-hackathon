@@ -24,9 +24,9 @@ const satelliteImageSources = {
 
 // Default satellite imagery options to use when actual API keys aren't available
 const defaultSatelliteImages = {
-    field1: '../cropimage.jpg',
-    field2: '../cropimage.jpg',
-    field3: '../cropimage.jpg'
+    field1: './cropimage.jpg',
+    field2: './cropimage.jpg',
+    field3: './cropimage.jpg'
 };
 
 // Normalized difference vegetation index (NDVI) imagery for vegetation health analysis
