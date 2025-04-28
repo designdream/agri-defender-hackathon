@@ -2,12 +2,15 @@
   <img src="NARD.png" alt="NARD Logo" width="400"/>
   <h1>AgriDefender 3D - Agricultural Threat Detection & Response System</h1>
   <h2><a href="https://designdream.github.io/agri-defender-hackathon/" target="_blank">🚀 Live Demo</a> | <a href="https://app.typeset.com/play/NP094O/embed" target="_blank">📊 View Presentation Deck</a></h2>
-  <img src="patches.png" alt="Mission Patches" width="800"/>
 </div>
 
 **NARD (Not Actually a Real Department)** is a figment of our collective imagination, born during a caffeine-fueled hackathon fever dream. Despite not existing, it has somehow become the most effective agricultural defense organization never to exist in reality.
 
 AgriDefender 3D is a precision agriculture defense system for detecting, monitoring, and responding to crop threats. Using geospatial visualization techniques, it enables agricultural stakeholders to identify biological threats early, deploy automated drone countermeasures, and coordinate field response strategies through a comprehensive sensor network and threat intelligence platform. All while being overseen by the completely fictional yet strangely efficient NARD organization.
+
+<div align="center">
+  <img src="patches.png" alt="Mission Patches" width="800"/>
+</div>
 
 ## Project Overview
 
