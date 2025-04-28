@@ -8,6 +8,18 @@
 
 AgriDefender 3D is a precision agriculture defense system for detecting, monitoring, and responding to crop threats. Using geospatial visualization techniques, it enables agricultural stakeholders to identify biological threats early, deploy automated drone countermeasures, and coordinate field response strategies through a comprehensive sensor network and threat intelligence platform. All while being overseen by the completely fictional yet strangely efficient NARD organization.
 
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Architecture](#architecture)
+- [Key Features](#key-features)
+- [Getting Started](#getting-started)
+- [Technologies Used](#technologies-used)
+- [Technical Highlights](#technical-highlights)
+- [API Integration Guide](#api-integration-guide)
+- [Future Enhancements](#future-enhancements)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
+
 <div align="center">
   <img src="patches.png" alt="Mission Patches" width="800"/>
 </div>
