@@ -1,6 +1,6 @@
 <div align="center">
   <h1>AgriDefender 3D - Agricultural Threat Detection & Response System</h1>
-  <h2><a href="https://designdream.github.io/agri-defender-hackathon/" target="_blank">🚀 Live Demo</a> | <a href="https://app.typeset.com/play/NP094O/embed" target="_blank">📊 View Presentation Deck</a></h2>
+  <h2><a href="https://designdream.github.io/agri-defender-hackathon/" target="_blank">🚀 Live Demo</a>
 </div>
 
 AgriDefender 3D is a precision agriculture defense system for detecting, monitoring, and responding to crop threats. Using geospatial visualization techniques, it enables agricultural stakeholders to identify biological threats early, deploy automated drone countermeasures, and coordinate field response strategies through a comprehensive sensor network and threat intelligence platform.
