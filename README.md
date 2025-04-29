@@ -47,7 +47,6 @@ The application is structured as follows:
 │   │   │   ├── index.html    # Main 3D visualization interface
 │   │   │   └── styles.css    # Styling for the visualization interface
 ├── AgriDefender_3D.pdf       # Presentation slides
-└── NARD.png                  # Logo of the fictional NARD organization
 ```
 
 ## Key Features
